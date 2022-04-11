@@ -6,7 +6,7 @@ Description:
     The genome is downloaded from UCSC and the hg19 genome is installed on your colab.
     The homer will be installed in the bin folder.
     And will be invoked by using the command:
-    perl bin/findMotifsGenome.pl
+    perl bin/findMotifsGenome.pl and the genome will be installed in the data/genomes/hg19
 '''
   !wget http://homer.ucsd.edu/homer/configureHomer.pl
   !perl configureHomer.pl -install hg19
@@ -17,6 +17,21 @@ Description:
 
 
 def create_one_by_one_motif(bed_file, out_name ):
+'''
+Description:
+    This function will create one by one motifs from the bed file and return in a pandas DataFrame.
+    The bed file should be in the format:
+    chr start end motif_name
+    The output will be a pandas DataFrame with the following columns:
+Parameters:
+    bed_file: the bed file with the format: chr start end motif_name
+    out_name: the name of the output file
+return:
+    pandas DataFrame with the following columns:
+    motif_name: the name of the motif
+    motif_length: the length of the motif
+    
+'''
   df_process_one = pd.read_csv(bed_file, sep='\t')
   
   df_process_one['3'] = df_process_one[['0','1','2']].apply(lambda x : '_'.join(map(str,x)) ,axis=1)
