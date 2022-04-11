@@ -1,11 +1,19 @@
 
 def install_homer_colab_hg19():
+'''
+Description:
+    This function  will install homer  and the hg19 genome on your colab.
+    The genome is downloaded from UCSC and the hg19 genome is installed on your colab.
+    The homer will be installed in the bin folder.
+    And will be invoked by using the command:
+    perl bin/findMotifsGenome.pl
+'''
   !wget http://homer.ucsd.edu/homer/configureHomer.pl
   !perl configureHomer.pl -install hg19
   x_p = !echo $PATH
   final_p  = x_p[0] + ':/content/.//bin/' 
   %env PATH= $final_p
-  
+
 
 
 def create_one_by_one_motif(bed_file, out_name ):
